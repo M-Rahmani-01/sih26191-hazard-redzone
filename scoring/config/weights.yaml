@@ -1,0 +1,11 @@
+landslide:
+  weights:
+    slope: 0.40
+    rainfall_intensity: 0.30
+    past_incidents: 0.20
+    population_density: 0.10
+  thresholds:
+    safe: 0.418
+    watch: 0.447
+    red: 0.499
+    critical: 0.60

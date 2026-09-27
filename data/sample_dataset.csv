@@ -1,0 +1,11 @@
+village_name,tehsil,latitude,longitude,elevation_m,slope_degrees,rainfall_intensity_mm,population,population_density,past_incidents,distance_to_river_km
+Ukhimath,Ukhimath,30.5183,79.0953,1311,38,1850,4500,620,3,0.8
+Guptkashi,Ukhimath,30.5330,79.0830,1319,42,1900,3200,540,2,1.2
+Chopta,Ukhimath,30.4894,79.1617,2900,55,2100,450,90,4,3.5
+Sari,Ukhimath,30.4600,79.1500,2100,60,2050,600,150,5,2.0
+Kedarpuri,Ukhimath,30.7346,79.0669,3583,68,2400,300,40,7,0.5
+Augustmuni,Rudraprayag,30.4167,79.0167,1000,30,1750,5200,780,2,0.6
+Rudraprayag,Rudraprayag,30.2846,78.9811,895,22,1773,8500,1100,1,0.3
+Tilwara,Rudraprayag,30.3167,78.9667,950,28,1800,2100,410,2,0.9
+Jakholi,Jakholi,30.3500,78.8500,1450,45,1900,3800,510,3,1.5
+Kirtinagar,Jakholi,30.2500,78.7833,700,25,1650,2900,470,1,1.1

@@ -1,0 +1,5 @@
+site_name,latitude,longitude,usable_area_sqkm,safety_buffer_pct,existing_occupancy
+Srinagar,30.2160,78.7803,3.5,0.25,300
+Gauchar,30.2833,79.3333,2.0,0.20,100
+Karnaprayag,30.2667,79.2167,1.5,0.25,50
+Devprayag,30.1460,78.5980,1.2,0.30,0

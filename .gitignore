@@ -1,0 +1,20 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environment secrets
+.env
+
+# Large data files (mat push karo, bahut bade hain)
+data/rudraprayag_dem.tif
+data/history.db
+
+# Node/Frontend
+frontend/node_modules/
+frontend/dist/
+
+# OS files
+.DS_Store
+Thumbs.db
