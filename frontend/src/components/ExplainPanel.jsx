@@ -25,13 +25,13 @@ export default function ExplainPanel({ village, onClose, lang = 'en' }) {
       .catch(() => setHistory([]))
   }, [village?.village_name, village?.hazard_score])
 
-  useEffect(() => {
+    useEffect(() => {
     setNarrative(null)
-  }, [village?.village_name])
+  }, [village?.village_name, lang])
 
-  const fetchNarrative = () => {
+      const fetchNarrative = () => {
     setLoadingNarrative(true)
-      axios.get(`${API_BASE}/v1/narrative/${encodeURIComponent(village.village_name)}`)
+    axios.get(`${API_BASE}/v1/narrative/${encodeURIComponent(village.village_name)}?lang=${lang}`)
       .then((res) => setNarrative(res.data))
       .catch(() => setNarrative({ text: 'Could not generate summary.', source: 'local', cached: false }))
       .finally(() => setLoadingNarrative(false))
