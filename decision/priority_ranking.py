@@ -5,7 +5,7 @@ from data_ingestion.dem_adapter import load_and_validate
 from data_ingestion.site_adapter import load_sites
 from scoring.landslide import LandslideScorer
 from decision.redzone_tiering import assign_tier
-from decision.site_matching import find_nearest_site
+from decision.site_matching import find_nearest_site, init_allocation_tracker
 from decision.cache import get_cached, set_cache
 
 
@@ -18,6 +18,7 @@ def compute_priority_list(overrides: dict | None = None) -> pd.DataFrame:
     df = load_and_validate()
     df = assign_villages_to_hex(df)
     sites_df = load_sites()
+    allocation_tracker = init_allocation_tracker(sites_df)
 
     if overrides:
         for village_name, changed_features in overrides.items():
@@ -53,7 +54,7 @@ def compute_priority_list(overrides: dict | None = None) -> pd.DataFrame:
         breakdowns.append(scorer.explain(features))
 
         if tier in ("Red", "Critical"):
-            match = find_nearest_site(row["latitude"], row["longitude"], sites_df)
+            match = find_nearest_site(row["latitude"], row["longitude"], sites_df, allocation_tracker, int(row["population"]))
             recommended_sites.append(match["recommended_site"])
             distances.append(match["distance_km"])
             site_capacities.append(match["site_remaining_capacity"])
