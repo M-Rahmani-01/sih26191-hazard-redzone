@@ -4,8 +4,12 @@ landslide:
     rainfall_intensity: 0.30
     past_incidents: 0.20
     population_density: 0.10
+  normalization:
+    slope: [0, 90]
+    rainfall_intensity: [0, 3500]
+    past_incidents: [0, 10]
+    population_density: [0, 5000]
   thresholds:
-    safe: 0.418
-    watch: 0.447
-    red: 0.499
-    critical: 0.60
+    safe: 0.272
+    watch: 0.319
+    red: 0.377

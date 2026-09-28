@@ -4,6 +4,8 @@ from scoring.base import HazardScorer
 
 CONFIG_PATH = Path(__file__).parent / "config" / "weights.yaml"
 
+FEATURE_NAMES = ["slope", "rainfall_intensity", "past_incidents", "population_density"]
+
 
 class LandslideScorer(HazardScorer):
     def __init__(self):
@@ -11,48 +13,29 @@ class LandslideScorer(HazardScorer):
             config = yaml.safe_load(f)["landslide"]
         self.weights = config["weights"]
         self.thresholds = config["thresholds"]
+        self.ranges = config["normalization"]
 
-    def _normalize(self, value: float, min_val: float, max_val: float) -> float:
-        if max_val == min_val:
+    def _normalize(self, name: str, value: float) -> float:
+        low, high = self.ranges[name]
+        if high == low:
             return 0.0
-        return max(0.0, min(1.0, (value - min_val) / (max_val - min_val)))
+        return max(0.0, min(1.0, (value - low) / (high - low)))
 
     def score(self, features: dict) -> tuple[float, float]:
-        norm_slope = self._normalize(features.get("slope", 0), 0, 90)
-        norm_rainfall = self._normalize(features.get("rainfall_intensity", 0), 0, 500)
-        norm_incidents = self._normalize(features.get("past_incidents", 0), 0, 10)
-        norm_population = self._normalize(features.get("population_density", 0), 0, 5000)
-
-        hazard_score = (
-            self.weights["slope"] * norm_slope
-            + self.weights["rainfall_intensity"] * norm_rainfall
-            + self.weights["past_incidents"] * norm_incidents
-            + self.weights["population_density"] * norm_population
+        hazard_score = sum(
+            self.weights[name] * self._normalize(name, features.get(name, 0))
+            for name in FEATURE_NAMES
         )
-
-        missing = sum(1 for k in ["slope", "rainfall_intensity", "past_incidents", "population_density"] if k not in features)
+        missing = sum(1 for name in FEATURE_NAMES if name not in features)
         confidence = 1.0 - (missing * 0.2)
-
         return round(hazard_score, 4), round(max(confidence, 0.2), 2)
-    def explain(self, features: dict) -> dict:
-        """
-        Har factor ka raw value, normalized value, weight, aur contribution
-        (weight x normalized) return karta hai — explainability panel ke liye.
-        """
-        norm_slope = self._normalize(features.get("slope", 0), 0, 90)
-        norm_rainfall = self._normalize(features.get("rainfall_intensity", 0), 0, 500)
-        norm_incidents = self._normalize(features.get("past_incidents", 0), 0, 10)
-        norm_population = self._normalize(features.get("population_density", 0), 0, 5000)
 
-        factors = {
-            "slope": (features.get("slope", 0), norm_slope, self.weights["slope"]),
-            "rainfall_intensity": (features.get("rainfall_intensity", 0), norm_rainfall, self.weights["rainfall_intensity"]),
-            "past_incidents": (features.get("past_incidents", 0), norm_incidents, self.weights["past_incidents"]),
-            "population_density": (features.get("population_density", 0), norm_population, self.weights["population_density"]),
-        }
-
+    def explain(self, features: dict) -> list[dict]:
         breakdown = []
-        for name, (raw, norm, weight) in factors.items():
+        for name in FEATURE_NAMES:
+            raw = features.get(name, 0)
+            norm = self._normalize(name, raw)
+            weight = self.weights[name]
             breakdown.append({
                 "factor": name,
                 "raw_value": raw,
@@ -60,6 +43,5 @@ class LandslideScorer(HazardScorer):
                 "weight": weight,
                 "contribution": round(norm * weight, 4),
             })
-
         breakdown.sort(key=lambda f: f["contribution"], reverse=True)
         return breakdown
