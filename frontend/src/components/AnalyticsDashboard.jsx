@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { API_BASE } from '../config'
 
 const TIER_COLORS = { Critical: '#dc2626', Red: '#ea580c', Watch: '#d97706', Safe: '#16a34a' }
 
@@ -10,12 +11,12 @@ export default function AnalyticsDashboard({ onClose }) {
   const [filterVillage, setFilterVillage] = useState('')
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/v1/analytics').then((res) => setData(res.data))
+    axios.get(`${API_BASE}/v1/analytics`).then((res) => setData(res.data))
   }, [])
 
   useEffect(() => {
     if (view === 'history' && !fullHistory) {
-      axios.get('http://127.0.0.1:8000/v1/history-all').then((res) => setFullHistory(res.data.records))
+      axios.get(`${API_BASE}/v1/history-all`).then((res) => setFullHistory(res.data.records))
     }
   }, [view])
 

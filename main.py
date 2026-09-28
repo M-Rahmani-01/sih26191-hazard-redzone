@@ -7,6 +7,7 @@ app = FastAPI(title="SIH26191 - Hazard Red Zone Platform")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173"],
+    allow_origin_regex=r"https://.*\.(vercel\.app|netlify\.app)",
     allow_methods=["*"],
     allow_headers=["*"],
 )

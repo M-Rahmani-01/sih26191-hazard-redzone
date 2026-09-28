@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useT, villageNamesHi, tehsilNamesHi } from '../i18n'
+import { API_BASE } from '../config'
 const TIER_META = {
   Critical: { color: '#dc2626', bg: '#fef2f2' },
   Red: { color: '#ea580c', bg: '#fff7ed' },
@@ -19,7 +20,7 @@ export default function ExplainPanel({ village, onClose, lang = 'en' }) {
 
   useEffect(() => {
     if (!village) return
-    axios.get(`http://127.0.0.1:8000/v1/history/${encodeURIComponent(village.village_name)}`)
+    axios.get(`${API_BASE}/v1/history/${encodeURIComponent(village.village_name)}`)      
       .then((res) => setHistory(res.data.history))
       .catch(() => setHistory([]))
   }, [village?.village_name, village?.hazard_score])
@@ -30,7 +31,7 @@ export default function ExplainPanel({ village, onClose, lang = 'en' }) {
 
   const fetchNarrative = () => {
     setLoadingNarrative(true)
-    axios.get(`http://127.0.0.1:8000/v1/narrative/${encodeURIComponent(village.village_name)}`)
+      axios.get(`${API_BASE}/v1/narrative/${encodeURIComponent(village.village_name)}`)
       .then((res) => setNarrative(res.data))
       .catch(() => setNarrative({ text: 'Could not generate summary.', source: 'local', cached: false }))
       .finally(() => setLoadingNarrative(false))

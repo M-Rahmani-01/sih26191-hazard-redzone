@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { API_BASE } from './config'
 import MapView from './components/MapView'
 import { useT } from './i18n'
 import PriorityTable from './components/PriorityTable'
@@ -26,7 +27,7 @@ export default function App() {
 
   const fetchData = () => {
     setLoading(true)
-    axios.get('http://127.0.0.1:8000/v1/priority-list')
+      axios.get(`${API_BASE}/v1/priority-list`)
       .then((res) => setVillages(res.data.results))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false))
@@ -38,7 +39,7 @@ export default function App() {
     villages.forEach(v => { ranksBeforeEvent[v.village_name] = v.priority_rank })
     setPrevRanks(ranksBeforeEvent)
 
-    axios.post('http://127.0.0.1:8000/v1/simulate-event', {
+    axios.post(`${API_BASE}/v1/simulate-event`, {      
       village_name: simVillage,
       rainfall_intensity: 3200,
       past_incidents: 9,
