@@ -63,11 +63,12 @@ export default function App() {
       fontFamily: "'Inter', sans-serif", background: '#f8fafc',
     }}>
       {/* Header */}
-      <div style={{
+      <div className="app-header" style={{
         padding: '16px 28px',
         background: 'linear-gradient(120deg, #7c2d12 0%, #9a3412 100%)',
         color: 'white', display: 'flex', justifyContent: 'space-between',
         alignItems: 'center', boxShadow: '0 2px 12px rgba(0,0,0,0.15)', zIndex: 10,
+        flexWrap: 'wrap', gap: 10,
       }}>
         <div>
           <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, letterSpacing: -0.3 }}>
@@ -112,8 +113,8 @@ export default function App() {
       </div>
 
       {/* Main content */}
-      <div style={{ display: 'flex', flex: 1, position: 'relative', overflow: 'hidden' }}>
-        <div style={{ flex: 2, position: 'relative' }}>
+           <div className="main-content" style={{ display: 'flex', flex: 1, position: 'relative', overflow: 'hidden' }}>
+        <div className="map-pane" style={{ flex: 2, position: 'relative', minHeight: 300 }}>
           {loading && (
             <div style={loaderOverlay}>
               <div style={spinner}></div>
@@ -121,16 +122,22 @@ export default function App() {
           )}
           {!loading && <MapView villages={villages} onSelect={setSelected} pulse={pulse} />}
         </div>
-        <div style={{ flex: 1, borderLeft: '1px solid #e2e8f0', background: 'white', overflow: 'hidden' }}>
+        <div className="list-pane" style={{ flex: 1, borderLeft: '1px solid #e2e8f0', background: 'white', overflow: 'auto', minHeight: 200 }}>
           <PriorityTable villages={villages} onSelect={setSelected} prevRanks={prevRanks} selectedName={selected?.village_name} lang={lang} />
         </div>
         <ExplainPanel village={selected} onClose={() => setSelected(null)} lang={lang} />
         {showAnalytics && <AnalyticsDashboard onClose={() => setShowAnalytics(false)} />}
       </div>
 
-      <style>{`
+        <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
         select:hover, button:hover { filter: brightness(1.08); }
+
+        @media (max-width: 768px) {
+          .main-content { flex-direction: column !important; overflow: auto !important; }
+          .map-pane { flex: none !important; height: 45vh !important; }
+          .list-pane { flex: none !important; border-left: none !important; border-top: 1px solid #e2e8f0; height: auto !important; }
+        }
       `}</style>
     </div>
   )
