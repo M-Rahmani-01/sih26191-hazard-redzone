@@ -11,23 +11,18 @@ numpy==2.1.3
 geopandas==1.0.1
 shapely==2.0.6
 h3==4.1.2                 # hex-grid engine (core of the architecture)
+
 # ===== SCORING / ML =====
-scikit-learn==1.6.1     # logistic regression calibration ke liye
-scipy==1.14.1
+scikit-learn==1.6.1
+scipy==1.14.1             # KD-tree site matching
 
 # ===== DATABASE (local-first, koi cloud key nahi) =====
 sqlalchemy==2.0.35
 # sqlite3 already Python ke saath aata hai — extra install nahi chahiye
-# psycopg2-binary==2.9.9  # (optional) agar Postgres+PostGIS use karna ho
 
 # ===== TESTING =====
 pytest==8.3.3
 
-# ===== OPTIONAL FALLBACK / ENHANCEMENT LAYER (in dono ke bina bhi system chalega) =====
-requests==2.32.3          # generic API fallback calls ke liye
-# google-genai==0.9.0      # (optional) LLM-based explainability fallback
-# redis==5.1.1             # (optional) agar caching layer scale karni ho
-
-# ===== FRONTEND note =====
-# Frontend Python ka part nahi hai — wo React + Leaflet (npm) se banega,
-# isliye yahan list nahi hai. Alag /frontend/package.json banega.
+# ===== AI SUMMARY (Gemini) + API calls =====
+google-genai
+requests==2.32.3
