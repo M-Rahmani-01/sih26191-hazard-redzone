@@ -100,9 +100,9 @@ Set `OPENTOPOGRAPHY_API_KEY` and `GEMINI_API_KEY` in a `.env` file in `project-r
 
 ## Team
 BY: TEAM-LEADER : Mohammad Rahmani
-Team [THE BYTEWRIGHT'S] — SIH2026-[128328]
+Team Name:[THE BYTEWRIGHT'S] — Team_ID: SIH2026-128328
 
-LEADER	Mohammad Rahmani
+TEAM_LEADER Mohammad Rahmani
 TEAM_MEMBER	Noor Arif	
 TEAM_MEMBER	Sania Rahman
 TEAM_MEMBER	Alok	
