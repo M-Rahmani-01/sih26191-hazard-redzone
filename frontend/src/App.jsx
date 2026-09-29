@@ -79,6 +79,8 @@ export default function App() {
           <button onClick={simulateEvent} className="btn btn-amber">{t.triggerEvent}</button>
           <button onClick={fetchData} className="btn btn-ghost">{t.reset}</button>
           <button onClick={() => setShowAnalytics(true)} className="btn btn-blue">{t.analytics}</button>
+          <button onClick={() => window.open(`${API_BASE}/v1/report?lang=${lang}`, '_blank')} className="btn btn-ghost">{t.generateReport}
+          </button>
         </div>
       </div>
 
@@ -106,6 +108,7 @@ export default function App() {
         <ExplainPanel village={selected} onClose={() => setSelected(null)} lang={lang} />
         {showAnalytics && <AnalyticsDashboard onClose={() => setShowAnalytics(false)} />}
       </div>
+        <div className="app-footer">{t.dataSources}</div>
 
       <style>{`
         * { box-sizing: border-box; }
@@ -223,6 +226,14 @@ export default function App() {
           width: 40px; height: 40px; border: 4px solid #e2e8f0;
           border-top-color: #b45309; border-radius: 50%;
           animation: spin 0.8s linear infinite;
+        }
+        .app-footer {
+          padding: 6px 16px;
+          font-size: 10.5px;
+          color: #94a3b8;
+          background: white;
+          border-top: 1px solid #e2e8f0;
+          text-align: center;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 

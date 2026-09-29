@@ -4,6 +4,8 @@ from decision.priority_ranking import compute_priority_list
 from decision.history_store import log_snapshot, get_history, get_analytics_summary, get_all_history
 from api.v1.narrative import get_narrative
 from api.v1.schemas import PriorityListResponse, HabitationResult, SimulateEventRequest, HistoryResponse, AnalyticsResponse, AllHistoryResponse, NarrativeResponse
+from fastapi.responses import HTMLResponse
+from decision.report import build_report_html
 router = APIRouter(prefix="/v1", tags=["redzone"])
 
 
@@ -54,3 +56,7 @@ def narrative(village_name: str):
     row = row.iloc[0]
     result = get_narrative(village_name, row["tier"], row["breakdown"], row["hazard_score"])
     return NarrativeResponse(village_name=village_name, **result)   
+@router.get("/report", response_class=HTMLResponse)
+def generate_report(lang: str = "en"):
+    df = compute_priority_list()
+    return build_report_html(df, lang)

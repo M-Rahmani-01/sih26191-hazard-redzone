@@ -13,3 +13,35 @@ landslide:
     safe: 0.272
     watch: 0.319
     red: 0.377
+
+flood:
+  weights:
+    distance_to_river_km: 0.45
+    rainfall_intensity: 0.35
+    past_incidents: 0.15
+    population_density: 0.05
+  normalization:
+    distance_to_river_km: [0, 5]     # kam distance = zyada risk, isliye invert hoga
+    rainfall_intensity: [0, 3500]
+    past_incidents: [0, 10]
+    population_density: [0, 5000]
+  thresholds:
+    safe: 0.30
+    watch: 0.45
+    red: 0.60
+
+erosion:
+  weights:
+    distance_to_river_km: 0.50
+    slope: 0.20
+    rainfall_intensity: 0.20
+    past_incidents: 0.10
+  normalization:
+    distance_to_river_km: [0, 5]
+    slope: [0, 90]
+    rainfall_intensity: [0, 3500]
+    past_incidents: [0, 10]
+  thresholds:
+    safe: 0.30
+    watch: 0.45
+    red: 0.60

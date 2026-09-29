@@ -6,6 +6,7 @@ export const translations = {
     triggerEvent: 'Trigger Event',
     reset: '↺ Reset',
     analytics: '📊 Analytics',
+    generateReport: '📄 Report',
     tiers: { Critical: 'Critical', Red: 'Red', Watch: 'Watch', Safe: 'Safe' },
     score: 'SCORE',
     tier: 'TIER',
@@ -37,6 +38,7 @@ export const translations = {
     relocateTo: 'Relocate to',
     was: 'was',
     tehsil: 'Tehsil',
+    dataSources: 'Data sources: NRSC Landslide Atlas of India (2023) · NASA SRTM elevation via OpenTopography',
   },
   hi: {
     title: '🏔️ SIH26191 — हैज़र्ड रेड ज़ोन प्लेटफ़ॉर्म',
@@ -45,6 +47,7 @@ export const translations = {
     triggerEvent: 'घटना ट्रिगर करें',
     reset: '↺ रीसेट',
     analytics: '📊 विश्लेषण',
+    generateReport: '📄 रिपोर्ट',
     tiers: { Critical: 'गंभीर', Red: 'लाल', Watch: 'निगरानी', Safe: 'सुरक्षित' },
     score: 'स्कोर',
     tier: 'श्रेणी',
@@ -76,6 +79,7 @@ export const translations = {
     relocateTo: 'यहाँ स्थानांतरित करें',
     was: 'पहले था',
     tehsil: 'तहसील',
+    dataSources: 'डेटा स्रोत: NRSC लैंडस्लाइड एटलस ऑफ इंडिया (2023) · NASA SRTM ऊँचाई डेटा (OpenTopography के माध्यम से)',
   },
 }
 
