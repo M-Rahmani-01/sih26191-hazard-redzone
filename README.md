@@ -28,7 +28,7 @@ Demo region: **Rudraprayag district, Uttarakhand** — chosen because NRSC's *La
 - **One-click officer report** — generates a printable/PDF-ready priority report (with data-source attribution) for District Magistrate / SDMA record-keeping
 
 ## Architecture
-
+'''
 Raw data (elevation, rainfall, population, incidents)
 │
 ▼
@@ -46,10 +46,11 @@ FastAPI backend (api/) — cached, SQLite history
 │
 ▼
 React + Leaflet dashboard (frontend/)
+'''
 
 
 ## Tech stack
-
+'''
 | Layer | Technology |
 |---|---|
 | Backend | Python, FastAPI, H3 (hex-grid), SciPy (KD-tree), SQLite |
@@ -58,9 +59,9 @@ React + Leaflet dashboard (frontend/)
 | Frontend | React, Vite, Leaflet, Axios |
 | Data | NASA SRTM (via OpenTopography) for terrain |
 | Deployment | Render (backend), Vercel (frontend) |
-
+'''
 ## Project structure
-
+'''
 project-root/
 ├── data_ingestion/ # data loading + validation, real DEM slope adapter
 ├── features/ # H3 hex-grid builder
@@ -70,7 +71,7 @@ project-root/
 ├── frontend/ # React + Leaflet dashboard
 ├── tests/ # unit tests for scoring/decision/features
 └── requirements.txt
-
+'''
 
 ## Running locally
 
