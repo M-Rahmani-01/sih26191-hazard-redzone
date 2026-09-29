@@ -24,6 +24,8 @@ Demo region: **Rudraprayag district, Uttarakhand** — chosen because NRSC's *La
 - **Bilingual** — full Hindi/English toggle, including AI summaries in both languages
 - **Live analytics** — every computation and simulated event is persisted (SQLite) and viewable in an in-app analytics dashboard
 - **Built to scale** — cached scoring, KD-tree lookups, and marker clustering so the same architecture handles thousands of habitations, not just ten
+- **Multi-hazard-ready architecture** — flood and coastal-erosion scorers are implemented against the same pluggable interface as landslide, ready to activate with hazard-specific data
+- **One-click officer report** — generates a printable/PDF-ready priority report (with data-source attribution) for District Magistrate / SDMA record-keeping
 
 ## Architecture
 
@@ -92,7 +94,7 @@ Set `OPENTOPOGRAPHY_API_KEY` and `GEMINI_API_KEY` in a `.env` file in `project-r
 ## Known limitations & next steps
 
 - Rainfall, population, and past-incident figures are structured sample values; slope is the only field currently sourced from real satellite data. Architecture is designed to plug in real GSI/IMD/Census data with no code changes.
-- Single hazard type (landslide) is fully live; flood and coastal-erosion scorers follow the same pluggable interface and are the next hazard modules to complete.
+- Landslide scoring is fully live end-to-end. Flood and coastal-erosion scorers are implemented against the same interface but not yet wired into the live dashboard, pending hazard-specific input data
 - Built for a single district demo; national-scale deployment would move from SQLite to PostGIS and add concurrent-user support.
 
 ## Team
